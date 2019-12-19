@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /xxl-sso-server
-  port: 80
+  port: 8001
 spring:
   application:
     name: its-shop-xxl-sso
@@ -28,4 +28,4 @@ eureka:
     hostname: 127.0.0.1
   client:
     serviceUrl:
-      defaultZone: http://localhost:8100/eureka/
+      defaultZone: http://localhost:8000/eureka/

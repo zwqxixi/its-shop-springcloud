@@ -13,11 +13,20 @@
     <packaging>pom</packaging>
     <modules>
         <module>its-shop-portal-web</module>
+        <module>its-shop-pay-web</module>
     </modules>
     <dependencies>
+        <!-- freemarker -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!-- xxl-sso-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-sso-core</artifactId>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
 

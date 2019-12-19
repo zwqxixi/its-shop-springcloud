@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9001
 #### 整合freemarker
 spring:
   freemarker:
@@ -14,7 +14,7 @@ spring:
     template-loader-path:
       - classpath:/templates
   application:
-    name: its-portal-web
+    name: its-pay-web
 ###服务注册到eureka地址
 eureka:
   client:
@@ -31,4 +31,3 @@ xxl:
 xxl-sso:
   excluded:
     paths: ''
-

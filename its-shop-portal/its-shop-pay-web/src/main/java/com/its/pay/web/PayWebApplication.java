@@ -1,19 +1,19 @@
-package com.its.shop.web;
+package com.its.pay.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
- * @ClassName: WebApplication
+ * @ClassName: PayWebApplication
  * @Auther: wenqin.zhao
- * @CreateDate: 2019/12/18 20:20
+ * @CreateDate: 2019/12/19 11:49
  * @Description: TODO
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class WebApplication {
+public class PayWebApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class);
+        SpringApplication.run(PayWebApplication.class,args);
     }
 }
