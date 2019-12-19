@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /xxl-sso-server
+  port: 80
+spring:
+  application:
+    name: its-shop-xxl-sso
+  freemarker:
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+    suffix: .ftl
+    templateLoaderPath: classpath:/templates/
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+xxl:
+  sso:
+    redis:
+      address: redis://192.168.118.131:6379
+      expire:
+        minite: 1440
+eureka:
+  instance:
+    ###注册到eurekaip地址
+    hostname: 127.0.0.1
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8100/eureka/

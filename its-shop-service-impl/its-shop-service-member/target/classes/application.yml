@@ -1,0 +1,9 @@
+#apollo相关
+app:
+  id: its-shop-member_id
+apollo:
+  meta: http://192.168.118.128:8080
+  bootstrap:
+    enabled: true
+    namespaces: application
+

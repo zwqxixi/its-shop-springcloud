@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.its.member.domain.mapper.ShopUserTokenMapper">
+  <resultMap id="BaseResultMap" type="com.its.member.domain.entity.ShopUserToken">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="login_type" jdbcType="VARCHAR" property="loginType" />
+    <result column="device_infor" jdbcType="VARCHAR" property="deviceInfor" />
+    <result column="is_availability" jdbcType="INTEGER" property="isAvailability" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+
+  <select id="selectByUserIdAndLoginType" resultMap="BaseResultMap">
+    SELECT * FROM shop_user_token WHERE login_type=#{loginType} and user_id=#{userId} and is_availability = 1;
+  </select>
+</mapper>

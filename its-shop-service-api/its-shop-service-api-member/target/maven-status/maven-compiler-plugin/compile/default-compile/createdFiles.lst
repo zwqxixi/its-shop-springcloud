@@ -1,0 +1,3 @@
+com\its\member\api\service\MemberLoginService.class
+com\its\member\api\service\MemberService.class
+com\its\member\api\dto\UserTokenDto.class

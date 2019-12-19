@@ -1,0 +1,4 @@
+com\its\member\domain\entity\ShopUser.class
+com\its\member\domain\entity\ShopUserToken.class
+com\its\member\domain\mapper\ShopUserMapper.class
+com\its\member\domain\mapper\ShopUserTokenMapper.class

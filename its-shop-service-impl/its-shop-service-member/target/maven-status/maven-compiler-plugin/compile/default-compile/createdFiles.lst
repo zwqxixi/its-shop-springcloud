@@ -1,0 +1,4 @@
+com\its\member\service\impl\MemberServiceImpl.class
+com\its\member\service\impl\MemberLoginServiceImpl.class
+com\its\member\service\feign\FeignWeiXinService.class
+com\its\member\service\MemberApplication.class
