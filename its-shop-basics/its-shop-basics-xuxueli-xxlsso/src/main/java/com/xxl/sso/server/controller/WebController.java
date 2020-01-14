@@ -2,13 +2,13 @@ package com.xxl.sso.server.controller;
 
 import com.its.common.core.constant.ApiResponseVo;
 import com.its.member.api.vo.ShopUserVo;
-import com.its.member.domain.entity.ShopUser;
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.login.SsoWebLoginHelper;
 import com.xxl.sso.core.store.SsoLoginStore;
 import com.xxl.sso.core.store.SsoSessionIdHelper;
 import com.xxl.sso.core.user.XxlSsoUser;
 import com.xxl.sso.server.feign.FeignMemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +24,7 @@ import java.util.UUID;
  * @author xuxueli 2017-08-01 21:39:47
  */
 @Controller
+@Slf4j
 public class WebController {
 
     @Autowired
@@ -31,7 +32,6 @@ public class WebController {
 
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
-
         // login check
         XxlSsoUser xxlUser = SsoWebLoginHelper.loginCheck(request, response);
 
@@ -110,7 +110,7 @@ public class WebController {
             return "redirect:/login";
         }
         ShopUserVo shopUserVo = result.getData();
-        // 1、make xxl-sso user
+        // 1、make xxl-job-sso user
         XxlSsoUser xxlUser = new XxlSsoUser();
         xxlUser.setUserid(String.valueOf(shopUserVo.getUserId()));
         xxlUser.setUsername(shopUserVo.getUserName());

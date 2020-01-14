@@ -1,0 +1,73 @@
+management:
+  health:
+    mail:
+      enabled: false
+  server:
+    servlet:
+      context-path: /actuator
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+server:
+  port: 8080
+  servlet:
+   context-path: /xxl-job-admin
+
+spring:
+  datasource:
+    driver-class-name:
+    password: 123456
+    tomcat:
+      max-active: 30
+      max-wait: 10000
+      test-on-borrow: true
+      validation-interval: 30000
+      validation-query: SELECT 1
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    url: jdbc:mysql://192.168.118.131:3306/xxl_job?Unicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+  freemarker:
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+    suffix: .ftl
+    templateLoaderPath: classpath:/templates/
+  mail:
+    host: smtp.qq.com
+    password: xxx
+    port: 25
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+            required: true
+    username: xxx@qq.com
+  mvc:
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+  application:
+    name: xxl-sso-job
+xxl:
+  job:
+    accessToken: ''
+    i18n: ''
+    logretentiondays: 30
+    triggerpool:
+      fast:
+        max: 200
+      slow:
+        max: 100
+eureka:
+  instance:
+    ###注册到eurekaip地址
+    hostname: 127.0.0.1
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/

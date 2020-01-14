@@ -16,26 +16,26 @@ import org.springframework.context.annotation.Configuration;
 public class XxlSsoConfig implements DisposableBean {
 
 
-    @Value("${xxl.sso.server}")
+    @Value("${xxl-job.sso.server}")
     private String xxlSsoServer;
 
-    @Value("${xxl.sso.logout.path}")
+    @Value("${xxl-job.sso.logout.path}")
     private String xxlSsoLogoutPath;
 
-    @Value("${xxl-sso.excluded.paths}")
+    @Value("${xxl-job-sso.excluded.paths}")
     private String xxlSsoExcludedPaths;
 
-    @Value("${xxl.sso.redis.address}")
+    @Value("${xxl-job.sso.redis.address}")
     private String xxlSsoRedisAddress;
 
 
     @Bean
     public FilterRegistrationBean xxlSsoFilterRegistration() {
 
-        // xxl-sso, redis init
+        // xxl-job-sso, redis init
         JedisUtil.init(xxlSsoRedisAddress);
 
-        // xxl-sso, filter init
+        // xxl-job-sso, filter init
         FilterRegistrationBean registration = new FilterRegistrationBean();
 
         registration.setName("XxlSsoWebFilter");
@@ -52,7 +52,7 @@ public class XxlSsoConfig implements DisposableBean {
     @Override
     public void destroy() throws Exception {
 
-        // xxl-sso, redis close
+        // xxl-job-sso, redis close
         JedisUtil.close();
     }
 

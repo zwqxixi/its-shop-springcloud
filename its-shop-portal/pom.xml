@@ -22,7 +22,7 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
-        <!-- xxl-sso-core -->
+        <!-- xxl-job-sso-job -->
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-sso-core</artifactId>

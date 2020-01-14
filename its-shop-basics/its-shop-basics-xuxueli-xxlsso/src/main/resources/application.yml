@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /xxl-sso-server
-  port: 8001
+  port: 8002
 spring:
   application:
     name: its-shop-xxl-sso

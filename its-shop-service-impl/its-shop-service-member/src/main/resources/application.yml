@@ -6,4 +6,3 @@ apollo:
   bootstrap:
     enabled: true
     namespaces: application
-

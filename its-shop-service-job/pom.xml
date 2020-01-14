@@ -11,5 +11,14 @@
 
     <artifactId>its-shop-service-job</artifactId>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

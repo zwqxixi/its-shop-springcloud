@@ -21,7 +21,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-        <!-- sso core -->
+        <!-- xxl-sso-core -->
         <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-sso-core</artifactId>

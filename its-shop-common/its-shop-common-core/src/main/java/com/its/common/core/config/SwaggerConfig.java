@@ -1,5 +1,5 @@
 /*
-package com.its.common.core.config;
+package com.its.common.job.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

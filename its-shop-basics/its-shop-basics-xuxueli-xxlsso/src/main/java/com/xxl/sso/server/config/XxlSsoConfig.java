@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class XxlSsoConfig implements InitializingBean, DisposableBean {
 
-    @Value("${xxl.sso.redis.address}")
+    @Value("${xxl-job.sso.redis.address}")
     private String redisAddress;
 
-    @Value("${xxl.sso.redis.expire.minite}")
+    @Value("${xxl-job.sso.redis.expire.minite}")
     private int redisExpireMinite;
 
     @Override
