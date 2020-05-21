@@ -1,6 +1,5 @@
 package com.its.basics.auth.controller;
 
-import com.its.basics.auth.config.auth.CustomUserDetailService;
 import com.its.common.core.constant.ApiResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
@@ -19,11 +18,10 @@ import java.security.Principal;
 @RequestMapping("/api")
 public class MemberController {
 
-    @Autowired
-    private CustomUserDetailService userDetailService;
 
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
+
 
     @PostMapping("/currentUserInfo")
     public Principal user(Principal member) {

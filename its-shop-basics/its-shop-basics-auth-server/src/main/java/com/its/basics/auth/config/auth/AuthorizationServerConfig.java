@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -28,6 +30,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer //表示认证授权服务器
+@Order(Integer.MIN_VALUE)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 
@@ -49,6 +52,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private CustomWebResponseExceptionTranslator customWebResponseExceptionTranslator;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     /**
      * 访问安全配置 配置前来验证token的Client需要用的角色
@@ -56,7 +61,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
+                // 开启/oauth/token支持client_id以及client_secret作登录认证
                 .allowFormAuthenticationForClients()
+                // 开启 /oauth/token验证端口无权限访问
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
     }
@@ -73,27 +80,31 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //配置在内存中，也可以从数据库中获取
         clients.inMemory() // 使用in-memory存储
                 // client_id
-                .withClient("client")
+                .withClient("android")
                 //client_secret
-                .secret("secret")
+                .secret("android")
                 //允许的授权范围
-                .scopes("app")
+                .scopes("read")
                 //允许的授权类型
-                .authorizedGrantTypes("authorization_code")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .and()
+                .withClient("browser")
+                .authorizedGrantTypes("password","refresh_token")
+                .scopes("read")
                 // 认证成功重定向URL
-                .redirectUris("http://localhost:8882/login","http://localhost:8883/login")
+                //.redirectUris("http://localhost:8882/login","http://localhost:8883/login")
                 //自动认证
                 .autoApprove(true);
     }
 
-    /*@Bean
+    @Bean
     public ClientDetailsService clientDetails(){
         return new CustomClientDetailService(dataSource, redisTemplate);
     }
 
-    *//**
+    /**
      * 访问端点配置
-     **//*
+     * */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(redisTokenStore())
@@ -101,16 +112,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                  .authenticationManager(authenticationManager)
                  .tokenServices(defaultTokenServices())
                  //认证异常翻译
-                 .exceptionTranslator(customWebResponseExceptionTranslator)
-                 .tokenServices(defaultTokenServices());
+                 .exceptionTranslator(customWebResponseExceptionTranslator);
 
     }
 
-    *//**
+    /**
      * <p>注意，自定义TokenServices的时候，需要设置@Primary，否则报错，</p>
      *
-     * @return
-     *//*
+     * */
     @Bean
     @Primary
     public DefaultTokenServices defaultTokenServices() {
@@ -129,6 +138,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public CustomRedisTokenStore redisTokenStore() {
         CustomRedisTokenStore redisTokenStore = new CustomRedisTokenStore(redisConnectionFactory);
         return redisTokenStore;
-    }*/
+    }
 
 }

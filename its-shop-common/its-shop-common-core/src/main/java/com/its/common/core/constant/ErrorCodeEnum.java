@@ -23,6 +23,8 @@ public class ErrorCodeEnum {
         message.put(1L, "请求参数不正确");
         message.put(2L, "用户名或密码错误");
         message.put(3L, "系统级错误");
+        message.put(4L,  "注销失败");
+        message.put(5L, "token无效");
     }
 
     public static String getMsgString(Long code) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.its.member.domain.mapper.ShopUserMapper">
-  <resultMap id="BaseResultMap" type="com.its.member.domain.entity.ShopUser">
+<mapper namespace="com.its.member.domain.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.its.member.domain.entity.User">
     <!--
       WARNING - @mbg.generated
     -->
@@ -19,6 +19,6 @@
     <result column="WX_OPENID" jdbcType="VARCHAR" property="wxOpenid" />
   </resultMap>
   <select id="selectByMobileAndPassword" resultMap="BaseResultMap">
-    SELECT *  FROM shop_user WHERE MOBILE=#{mobile} AND PASSWORD=#{password} AND  IS_AVALIBLE = 0;
+    SELECT *  FROM its_user WHERE MOBILE=#{mobile} AND PASSWORD=#{password} AND  IS_AVALIBLE = 0;
   </select>
 </mapper>

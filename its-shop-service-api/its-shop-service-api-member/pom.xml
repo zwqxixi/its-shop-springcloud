@@ -11,4 +11,12 @@
 
     <artifactId>its-shop-service-api-member</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.its</groupId>
+            <artifactId>its-shop-service-domain-member</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -8,14 +8,14 @@ import com.its.common.core.token.GenerateToken;
 import com.its.common.core.transaction.RedisDataSourceTransaction;
 import com.its.common.core.utils.ClassConversionUtils;
 import com.its.common.core.utils.RedisUtils;
-import com.its.member.api.dto.ShopUserDto;
+import com.its.member.api.dto.UserDto;
 import com.its.member.api.dto.UserTokenDto;
 import com.its.member.api.service.MemberLoginService;
-import com.its.member.api.vo.ShopUserVo;
-import com.its.member.domain.entity.ShopUser;
-import com.its.member.domain.entity.ShopUserToken;
-import com.its.member.domain.mapper.ShopUserMapper;
-import com.its.member.domain.mapper.ShopUserTokenMapper;
+import com.its.member.api.vo.UserVo;
+import com.its.member.domain.entity.User;
+import com.its.member.domain.entity.UserToken;
+import com.its.member.domain.mapper.UserMapper;
+import com.its.member.domain.mapper.UserTokenMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.TransactionStatus;
@@ -35,10 +35,10 @@ public class MemberLoginServiceImpl implements MemberLoginService{
 
 
      @Resource
-     private ShopUserMapper shopUserMapper;
+     private UserMapper UserMapper;
 
      @Resource
-     private ShopUserTokenMapper shopUserTokenMapper;
+     private UserTokenMapper UserTokenMapper;
 
      @Resource
      private GenerateToken generateToken;
@@ -58,7 +58,7 @@ public class MemberLoginServiceImpl implements MemberLoginService{
       * @CreateDate: 2019/11/21 16:06
       */
      @Override
-     public ApiResponseVo onlyUserLogin(@RequestBody UserTokenDto userTokenDto) throws Exception{
+     public ApiResponseVo onlyLogin(@RequestBody UserTokenDto userTokenDto) throws Exception{
           //TODO  1.验证入参是否正确 (登录类型是否符合)
           //      2.验证手机号和密码是否正确
           //      3.根据userId和loginType查询用户是否已经登录
@@ -73,33 +73,33 @@ public class MemberLoginServiceImpl implements MemberLoginService{
           if(type == null && !ClientEnum.getAllClientType().contains(type)){
                return ApiResponseVo.genError(1L);
           }
-          ShopUser shopUser = shopUserMapper.selectByMobileAndPassword(mobile,password);
-          if(shopUser == null){
+          User User = UserMapper.selectByMobileAndPassword(mobile,password);
+          if(User == null){
                return ApiResponseVo.genError(2L);
           }
-          Integer userId = shopUser.getUserId();
+          Integer userId = User.getUserId();
           String loginType = ClientEnum.getClientTypeByCode(type);
-          ShopUserToken userToken = shopUserTokenMapper.selectByUserIdAndLoginType(userId,loginType);
+          UserToken userToken = UserTokenMapper.selectByUserIdAndLoginType(userId,loginType);
           //判断用户是否已经在相同设备登录
           TransactionStatus transactionStatus = redisDataSourceTransaction.begin();//开启事务
           if(userToken != null){
                //先删除缓存中的token   更新数据库表token的可用状态
                Boolean b = redisUtils.delKey(userToken.getToken());
                userToken.setIsAvailability(2);
-               int i = shopUserTokenMapper.updateByPrimaryKeySelective(userToken);
+               int i = UserTokenMapper.updateByPrimaryKeySelective(userToken);
                if(i < 0){
                     redisDataSourceTransaction.rollback(transactionStatus);
                     return ApiResponseVo.genError(ErrorCodeEnum.SYSTEM_ERROR);
                }
           }
           String newToken = generateToken.createToken(RedisContans.LOGIN_PREFIX+loginType,userId.toString());
-          ShopUserToken shopUserToken = new ShopUserToken();
-          BeanUtils.copyProperties(userTokenDto,shopUserToken);
-          shopUserToken.setLoginType(loginType);
-          shopUserToken.setToken(newToken);
-          shopUserToken.setIsAvailability(1);
-          shopUserToken.setUserId(userId);
-          int i = shopUserTokenMapper.insertSelective(shopUserToken);
+          UserToken UserToken = new UserToken();
+          BeanUtils.copyProperties(userTokenDto,UserToken);
+          UserToken.setLoginType(loginType);
+          UserToken.setToken(newToken);
+          UserToken.setIsAvailability(1);
+          UserToken.setUserId(userId);
+          int i = UserTokenMapper.insertSelective(UserToken);
           if(i< 0){
                redisDataSourceTransaction.rollback(transactionStatus);
                return ApiResponseVo.genError(ErrorCodeEnum.SYSTEM_ERROR);
@@ -111,16 +111,16 @@ public class MemberLoginServiceImpl implements MemberLoginService{
      }
 
      @Override
-     public ApiResponseVo<ShopUserVo> authLogin(String mobile, String password) {
+     public ApiResponseVo<UserVo> authLogin(String mobile, String password) {
           if(StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)){
                return ApiResponseVo.genError(1L);
           }
-          ShopUser shopUser = shopUserMapper.selectByMobileAndPassword(mobile,password);
-          if(shopUser == null){
+          User User = UserMapper.selectByMobileAndPassword(mobile,password);
+          if(User == null){
                return ApiResponseVo.genError(2L);
           }
-          ShopUserVo shopUserVo = new ShopUserVo();
-          BeanUtils.copyProperties(shopUser,shopUserVo);
-          return ApiResponseVo.genSuccess(shopUserVo);
+          UserVo UserVo = new UserVo();
+          BeanUtils.copyProperties(User,UserVo);
+          return ApiResponseVo.genSuccess(UserVo);
      }
 }

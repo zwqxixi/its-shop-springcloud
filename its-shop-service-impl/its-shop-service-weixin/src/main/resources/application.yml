@@ -1,9 +1,77 @@
 #apollo相关
-app:
-  id: its-shop-weixin_id
-apollo:
-  meta: http://192.168.118.128:8080
-  bootstrap:
-    enabled: true
-    namespaces: application,weixin
+#app:
+  #id: its-shop-weixin_id
+#apollo:
+  #meta: http://192.168.118.128:8080
+  #bootstrap:
+    #enabled: true
+    #namespaces: application,weixin
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+server:
+  port: 8100
+spring:
+  application:
+    name: its-shop-weixin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    min-evictable-idle-time-millis: 1800000
+    password: 123456
+    test-on-borrow: true
+    test-while-idle: true
+    time-between-eviction-runs-millis: 300000
+    url: jdbc:mysql://192.168.121.131:3306/it_student?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    validation-query: SELECT 1 FROM DUAL
+  redis:
+    database: 0
+    host: 192.168.118.131
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+swagger:
+  base-package: com.its.weixin.service.impl
+  contact:
+    email: 1656461546@qq.com
+    name: 赵文钦
+  description: 该项目接入微信公众平台，实现注册码登录功能
+  terms-of-service-url: www.mayikt.com
+  title: SpringCloud2.x构建微服务电商项目-微信服务接口
+  version: 1.0
+##微信公众号相关配置
+its:
+  weixin:
+    default:
+      registration:
+        code:
+          message: 您的消息，我们已经收到,会及时回复给您的!
+    registration:
+      code:
+        message: 您的注册码为:registrationCodeMessage
+logging:
+  level:
+    com:
+      github:
+        binarywang:
+          demo:
+            wx:
+              mp: DEBUG
+    me:
+      chanjar:
+        weixin: DEBUG
+    org:
+      springframework:
+        web: INFO
+wx:
+  mp:
+    configs:
+      -   appId: wx51c7435514efaddf
+          secret: addfd072aa101aa285b6cd98698aac7b
+          token: its-shop
 

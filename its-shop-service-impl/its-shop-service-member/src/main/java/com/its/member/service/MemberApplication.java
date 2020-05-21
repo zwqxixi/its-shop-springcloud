@@ -22,6 +22,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableSwagger2Doc
 @MapperScan("com.its.member.domain.mapper")
 @ComponentScan("com.its")
+//引入Spring Security的依赖后,Springboot项目启动时会 通过SecurityAutoConfigration自动配置
+//@EnableAutoConfiguration(exclude = {
+//        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
+//})
 public class MemberApplication {
     public static void main(String[] args) {
         SpringApplication.run(MemberApplication.class,args);

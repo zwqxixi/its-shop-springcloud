@@ -5,16 +5,15 @@ management:
   server:
     servlet:
       context-path: /actuator
-mybatis:
-  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
 server:
-  port: 8080
+  port: 8002
   servlet:
    context-path: /xxl-job-admin
-
 spring:
+  application:
+    name: xxl-sso-job
   datasource:
-    driver-class-name:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     password: 123456
     tomcat:
       max-active: 30
@@ -23,7 +22,7 @@ spring:
       validation-interval: 30000
       validation-query: SELECT 1
     type: org.apache.tomcat.jdbc.pool.DataSource
-    url: jdbc:mysql://192.168.118.131:3306/xxl_job?Unicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://192.168.118.131:3306/xxl_job?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
   freemarker:
     charset: UTF-8
@@ -52,8 +51,8 @@ spring:
     static-path-pattern: /static/**
   resources:
     static-locations: classpath:/static/
-  application:
-    name: xxl-sso-job
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
 xxl:
   job:
     accessToken: ''

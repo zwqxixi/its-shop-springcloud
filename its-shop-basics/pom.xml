@@ -20,6 +20,7 @@
         <module>its-shop-basics-codingapi-lcn</module>
         <module>its-shop-basics-codingapi-zipkin</module>
         <module>its-shop-basics-xuxueli-xxlsso</module>
+        <module>its-shop-basics-auth-server</module>
     </modules>
     <dependencies>
         <!--SpringCloud eureka-server -->

@@ -3,19 +3,30 @@ server:
 spring:
   application:
     name: its-shop-auth
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    password: 123456
-#    tomcat:
-#      max-active: 30
-#      max-wait: 10000
-#      test-on-borrow: true
-#      validation-interval: 30000
-#      validation-query: SELECT 1
-#    type: org.apache.tomcat.jdbc.pool.DataSource
-#    url: jdbc:mysql://192.168.118.131:3306/xxl_job?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
-#    username: root
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8000/eureka
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    tomcat:
+      max-active: 30
+      max-wait: 10000
+      test-on-borrow: true
+      validation-interval: 30000
+      validation-query: SELECT 1
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    url: jdbc:mysql://192.168.118.131:3306/it_oauth?Unicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+  redis:
+    database: 1
+    host: 192.168.118.131
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka

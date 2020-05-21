@@ -1,7 +1,7 @@
 package com.xxl.sso.server.controller;
 
 import com.its.common.core.constant.ApiResponseVo;
-import com.its.member.api.vo.ShopUserVo;
+import com.its.member.api.vo.UserVo;
 import com.xxl.sso.core.conf.Conf;
 import com.xxl.sso.core.login.SsoWebLoginHelper;
 import com.xxl.sso.core.store.SsoLoginStore;
@@ -103,17 +103,17 @@ public class WebController {
             redirectAttributes.addAttribute(Conf.REDIRECT_URL, request.getParameter(Conf.REDIRECT_URL));
             return "redirect:/login";
         }*/
-        ApiResponseVo<ShopUserVo> result = feignMemberService.authLogin(username,password);
+        ApiResponseVo<UserVo> result = feignMemberService.authLogin(username,password);
         if(result.getCode() != 0){
             redirectAttributes.addAttribute("errorMsg", result.getMessage());
             redirectAttributes.addAttribute(Conf.REDIRECT_URL, request.getParameter(Conf.REDIRECT_URL));
             return "redirect:/login";
         }
-        ShopUserVo shopUserVo = result.getData();
+        UserVo UserVo = result.getData();
         // 1、make xxl-job-sso user
         XxlSsoUser xxlUser = new XxlSsoUser();
-        xxlUser.setUserid(String.valueOf(shopUserVo.getUserId()));
-        xxlUser.setUsername(shopUserVo.getUserName());
+        xxlUser.setUserid(String.valueOf(UserVo.getUserId()));
+        xxlUser.setUsername(UserVo.getUserName());
         xxlUser.setVersion(UUID.randomUUID().toString().replaceAll("-", ""));
         xxlUser.setExpireMinite(SsoLoginStore.getRedisExpireMinite());
         xxlUser.setExpireFreshTime(System.currentTimeMillis());
