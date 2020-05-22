@@ -9,6 +9,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -29,7 +30,8 @@ import javax.sql.DataSource;
  * @description: 认证授权配置
  */
 @Configuration
-@EnableAuthorizationServer //表示认证授权服务器
+//表示认证授权服务器
+@EnableAuthorizationServer
 @Order(Integer.MIN_VALUE)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
@@ -52,9 +54,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private CustomWebResponseExceptionTranslator customWebResponseExceptionTranslator;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
     /**
      * 访问安全配置 配置前来验证token的Client需要用的角色
      * */
@@ -90,11 +93,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .and()
                 .withClient("browser")
                 .authorizedGrantTypes("password","refresh_token")
-                .scopes("read")
+                .scopes("read");
                 // 认证成功重定向URL
                 //.redirectUris("http://localhost:8882/login","http://localhost:8883/login")
                 //自动认证
-                .autoApprove(true);
+                //.autoApprove(true);
     }
 
     @Bean
@@ -126,7 +129,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(redisTokenStore());
         tokenServices.setSupportRefreshToken(false);
-        //tokenServices.setClientDetailsService(clientDetails());
         // token有效期自定义设置，默认12小时
         tokenServices.setAccessTokenValiditySeconds(60*60*12);
         // refresh_token默认30天

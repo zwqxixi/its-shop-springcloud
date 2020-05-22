@@ -1,6 +1,7 @@
 package com.its.basics.auth.config.resource;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  * @className: NoEncryptPasswordEncoder
