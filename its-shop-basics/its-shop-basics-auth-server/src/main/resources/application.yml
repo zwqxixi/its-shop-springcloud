@@ -25,12 +25,10 @@ spring:
         max-wait: -1
         min-idle: 0
     port: 6379
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka
-
 logging:
   level:
     root: INFO

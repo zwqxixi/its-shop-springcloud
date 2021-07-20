@@ -26,20 +26,11 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     private FeignWeiXinService feignWeiXinService;
 
-    @Override
-    public Principal user(Principal principal) {
-        return principal;
-    }
+//    @Override
+//    public Principal user(Principal principal) {
+//        return principal;
+//    }
 
-    @Override
-    public String query() {
-        return "具有query权限";
-    }
-
-    @Override
-    public String hello() {
-        return "hello";
-    }
 
     @Override
     public Member findByUserName(String userName) {
@@ -51,9 +42,4 @@ public class MemberServiceImpl implements MemberService {
         }
         return null;
     }
-
-    /*@Override
-    public TestEntity MemberToWeiXin() {
-        return feignWeiXinService.getTestEntity();
-    }*/
 }

@@ -14,8 +14,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * @description: 资源认证配置
  */
 //表示资源认证服务器
-@EnableResourceServer
-@Configuration
+//@EnableResourceServer
+//@Configuration
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override

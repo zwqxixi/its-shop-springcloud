@@ -14,6 +14,8 @@ public class ErrorCodeEnum {
     public final static Long WRONG_PARAM = 1L; //请求参数不正确
     public final static Long USER_OR_PASS_WRONG = 2L; //用户名或密码错误
     public final static Long SYSTEM_ERROR = 3L; //系统级错误
+    public final static Long TOKEN_IS_INVALID = 5L;//token无效
+    public final static Long USER_NOT_LOGIN = 6L;//用户未登录
 
 
     private static HashMap<Long,String> message = new HashMap<>();

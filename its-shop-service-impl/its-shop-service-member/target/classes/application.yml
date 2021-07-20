@@ -18,6 +18,8 @@ server:
 spring:
   application:
     name: its-shop-member
+  zipkin:
+    base-url: localhost:8004
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     min-evictable-idle-time-millis: 1800000
@@ -25,12 +27,12 @@ spring:
     test-on-borrow: true
     test-while-idle: true
     time-between-eviction-runs-millis: 300000
-    url: jdbc:mysql://192.168.118.131:3306/it_student?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/it_student?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     validation-query: SELECT 1 FROM DUAL
   redis:
     database: 1
-    host: 192.168.118.131
+    host: 192.168.50.126
     jedis:
       pool:
         max-active: 8
@@ -39,15 +41,16 @@ spring:
         min-idle: 0
     port: 6379
 #---------------------OAuth2---------------------
-security:
-  oauth2:
-    client:
-      access-token-uri: http://localhost:80/auth/oauth/token
-      user-authorization-uri: http://localhost:80/auth/oauth/authorize
-      #client-id: web
-    resource:
-      user-info-uri:  http://localhost:80/auth/api/member
-      prefer-token-info: false
+#security:
+#  oauth2:
+#    client:
+#      access-token-uri: http://localhost:8003/oauth/token
+#      user-authorization-uri: http://localhost:8003/oauth/authorize
+#      #client-id: web
+#    resource:
+#      user-info-uri:  http://localhost:80/auth/api/member
+#      prefer-token-info: false
+      
 #----------------------超时配置-------------------
 #ribbon:
 #  ReadTimeout: 3000

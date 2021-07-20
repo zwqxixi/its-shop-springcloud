@@ -17,17 +17,10 @@ import java.security.Principal;
 @RequestMapping("api")
 public interface MemberService {
 
-    @GetMapping("/current")
-    Principal user(Principal principal);
+//    @GetMapping("/current")
+//    Principal user(Principal principal);
 
     @GetMapping("/getMemberInfo")
     Member findByUserName(@RequestParam("userName") String userName);
 
-    @GetMapping("query")
-    @PreAuthorize("hasAnyAuthority('query')")
-    String query();
-
-    @GetMapping("hello")
-    @PreAuthorize("hasAnyAuthority('hello')")
-    String hello();
 }

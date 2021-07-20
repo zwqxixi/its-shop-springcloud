@@ -24,12 +24,12 @@ zuul:
       serviceId: its-shop-auth
 
 #---------------------OAuth2---------------------
-security:
-  oauth2:
-    client:
-      access-token-uri: http://localhost:80/auth/oauth/token
-      user-authorization-uri: http://localhost:80/auth/oauth/authorize
-      #client-id: web
-    resource:
-      user-info-uri:  http://localhost:80/auth/api/member
-      prefer-token-info: false
+#security:
+#  oauth2:
+#    client:
+#      access-token-uri: http://localhost:80/auth/oauth/token
+#      user-authorization-uri: http://localhost:80/auth/oauth/authorize
+#      #client-id: web
+#    resource:
+#      user-info-uri:  http://localhost:80/auth/api/member
+#      prefer-token-info: false

@@ -27,7 +27,7 @@ import java.util.List;
 @EnableZuulProxy
 @EnableApolloConfig
 @EnableSwagger2Doc
-@EnableOAuth2Sso //标明当前服务是Oauth Client
+//@EnableOAuth2Sso //标明当前服务是Oauth Client
 public class ZuulApplication {
     public static void main(String[] args) {
         SpringApplication.run(ZuulApplication.class,args);
